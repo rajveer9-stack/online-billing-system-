@@ -21,14 +21,6 @@ Live Project Link: https://zenzy-billing.onrender.com
 > The site is on a free host that sleeps when unused, so the **first load can take 30–60 seconds**. Please wait, then refresh once if needed.
 
 ### 🔑 Login for testing
----
-
-## 👤 Student Information
-
-**Name:** Rajveer Singh Raghuvanshi,Arman , Uttkarsh ,Shivansh , Vinayak, Harsha , Chandan , Sushant 
-
-**College ID:** 2025KUEC2054,2025kuec2051, 2025kuec2052, 2025kuec2053, 2025kuec2055, 2025kuec2058, 2025kuec2059, 2025kuec2060
-**Batch:** C2
 
 Click **Start New Billing** and log in with:
 
@@ -38,6 +30,13 @@ Click **Start New Billing** and log in with:
 (Other employee emails also work with the same password: 2025kuec2054, 2025kuec2052, 2025kuec2053, 2025kuec2055, 2025kuec2058, 2025kuec2059, 2025kuec2060 — all `@iiitkota.ac.in`.)
 
 ---
+## 👤 Student Information
+
+**Name:** Rajveer Singh Raghuvanshi,Arman , Uttkarsh ,Shivansh , Vinayak, Harsha , Chandan , Sushant 
+
+**College ID:** 2025KUEC2054,2025kuec2051, 2025kuec2052, 2025kuec2053, 2025kuec2055, 2025kuec2058, 2025kuec2059, 2025kuec2060
+
+**Batch:** C2
 
 ## ✨ Features
 
