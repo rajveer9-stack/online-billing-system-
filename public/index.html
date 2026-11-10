@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
+   
     <nav class="navbar">
         <div class="brand-name">Zenzy Clothing Wear</div>
         <ul class="nav-links">
@@ -15,7 +15,7 @@
             <li><button onclick="switchPage('products-page')" class="nav-btn" id="nav-products-page">Products</button></li>
             <li><button onclick="switchPage('order-page')" class="nav-btn" id="nav-order-page">Select Your Order</button></li>
             <li><button onclick="switchPage('database-page')" class="nav-btn" id="nav-database-page">Database</button></li>
-            <!-- Employee ID menu (visible only when logged in) -->
+          
             <li class="user-menu" id="user-menu" style="display:none;">
                 <button class="nav-btn id-btn" onclick="toggleUserDropdown(event)">👤 ID: <span id="employee-id-label"></span> ▾</button>
                 <div class="user-dropdown" id="user-dropdown">
@@ -28,7 +28,7 @@
 
     <main class="main-content">
 
-        <!-- PAGE 1: HOME PAGE -->
+        
         <section id="home-page" class="page active-page">
             <div class="hero-section">
                 <h1>Welcome to Zenzy Clothing Wear</h1>
@@ -37,26 +37,25 @@
             </div>
         </section>
 
-        <!-- PAGE 2: PRODUCTS PAGE (Display Only) -->
         <section id="products-page" class="page">
             <h2>Complete Product Catalog</h2>
             <div class="product-grid" id="full-catalog-grid">
-                <!-- JS will populate all products here -->
+              
             </div>
         </section>
 
-        <!-- PAGE 3: SELECT YOUR ORDER (Billing System) -->
+     
         <section id="order-page" class="page">
             <div class="pos-layout">
-                <!-- Left: Select Clothes -->
+              
                 <div class="selection-panel">
                     <h2>Select Clothes</h2>
                     <div class="product-grid" id="order-catalog-grid">
-                        <!-- JS will populate products for selection here -->
+
                     </div>
                 </div>
 
-                <!-- Right: Customer Details & Cart -->
+                
                 <div class="billing-panel">
                     <h2>Customer Bill</h2>
 
@@ -90,7 +89,7 @@
             </div>
         </section>
 
-        <!-- PAGE 4: DATABASE PAGE (Sales Record) -->
+       
         <section id="database-page" class="page">
             <h2>Sales Database Overview</h2>
 
@@ -136,7 +135,7 @@
 
     </main>
 
-    <!-- FINAL BILL POPUP -->
+ 
     <div id="bill-modal" class="bill-overlay">
         <div class="bill-box">
             <div class="bill-title">Zenzy Clothing Wear</div>
@@ -149,7 +148,7 @@
         </div>
     </div>
 
-    <!-- LOGIN POPUP -->
+
     <div id="login-modal" class="bill-overlay">
         <div class="bill-box login-box">
             <div class="bill-title">Employee Login</div>
