@@ -1,14 +1,8 @@
-# Web Development Final Project
+# Web Development Project
 
 ## Zenzy Clothing Wear – Online Billing System
 
 ---
-
-## 👤 Student Information
-
-**Name:** YOUR FULL NAME
-**College ID:** YOUR COLLEGE ID
-**Batch:** YOUR BATCH
 
 ---
 
@@ -22,7 +16,7 @@ It's an online billing (POS) website for a clothing store. Employees log in, sel
 
 ## 🚀 Deployment Link (Mandatory)
 
-Live Project Link: (https://YOUR-APP-NAME.onrender.com)
+Live Project Link: https://zenzy-billing.onrender.com
 
 > The site is on a free host that sleeps when unused, so the **first load can take 30–60 seconds**. Please wait, then refresh once if needed.
 
@@ -30,12 +24,19 @@ Live Project Link: (https://YOUR-APP-NAME.onrender.com)
 
 Click **Start New Billing** and log in with:
 
-- **Email:** `2025kuec2054@iiitkota.ac.in`
+- **Email:** `2025kuec2051@iiitkota.ac.in`
 - **Password:** `12345`
 
-(Other employee emails also work with the same password: 2025kuec2051, 2025kuec2052, 2025kuec2053, 2025kuec2055, 2025kuec2058, 2025kuec2059, 2025kuec2060 — all `@iiitkota.ac.in`.)
+(Other employee emails also work with the same password: 2025kuec2054, 2025kuec2052, 2025kuec2053, 2025kuec2055, 2025kuec2058, 2025kuec2059, 2025kuec2060 — all `@iiitkota.ac.in`.)
 
 ---
+## 👤 Student Information
+
+**Name:** Rajveer Singh Raghuvanshi,Arman , Uttkarsh ,Shivansh , Vinayak, Harsha , Chandan , Sushant 
+
+**College ID:** 2025KUEC2054,2025kuec2051, 2025kuec2052, 2025kuec2053, 2025kuec2055, 2025kuec2058, 2025kuec2059, 2025kuec2060
+
+**Batch:** C2
 
 ## ✨ Features
 
@@ -64,7 +65,7 @@ Open http://localhost:3000
 
 ## 📁 Project Structure
 
-```
+```text
 ├── server.js        Express server + API
 ├── schema.sql       Database tables
 ├── seed-demo.js     Demo data generator
