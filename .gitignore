@@ -1,0 +1,6 @@
+node_modules/
+zenzy.db
+zenzy.db-journal
+*.db
+.env
+.DS_Store

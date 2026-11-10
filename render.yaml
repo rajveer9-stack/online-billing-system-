@@ -1,0 +1,15 @@
+# Render "Blueprint": lets Render create the web service automatically from this repo.
+services:
+  - type: web
+    name: zenzy-billing
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: NODE_ENV
+        value: production
+      - key: AUTO_SEED
+        value: "true"
