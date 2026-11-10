@@ -22,6 +22,12 @@ Live Project Link: https://zenzy-billing.onrender.com
 
 ### 🔑 Login for testing
 
+## 👤 Student Information
+
+**Name:** Rajveer Singh Raghuvanshi,Arman , Uttkarsh ,Shivansh , Vinayak, Harsha , Chandan , Sushant 
+**College ID:** 2025KUEC2054,2025kuec2051, 2025kuec2052, 2025kuec2053, 2025kuec2055, 2025kuec2058, 2025kuec2059, 2025kuec2060
+**Batch:** C2
+
 Click **Start New Billing** and log in with:
 
 - **Email:** `2025kuec2051@iiitkota.ac.in`
