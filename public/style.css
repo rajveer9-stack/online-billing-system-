@@ -9,7 +9,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 body { background-color: var(--bg-light); color: var(--text); display: flex; flex-direction: column; height: 100vh; }
 
-/* Navigation */
+
 .navbar { background: var(--primary); color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
 .brand-name { font-size: 1.5rem; font-weight: bold; letter-spacing: 1px; }
 .nav-links { list-style: none; display: flex; gap: 10px; align-items: center; }
@@ -17,7 +17,7 @@ body { background-color: var(--bg-light); color: var(--text); display: flex; fle
 .nav-btn:hover { color: white; background: rgba(255,255,255,0.1); }
 .nav-btn.active { color: white; background: var(--accent); font-weight: bold; }
 
-/* Page Switching */
+
 .main-content { flex: 1; padding: 20px; overflow-y: auto; }
 .page { display: none; animation: fadeIn 0.3s ease-in-out; }
 .page.active-page { display: block; }
@@ -25,13 +25,13 @@ body { background-color: var(--bg-light); color: var(--text); display: flex; fle
 
 h2 { margin-bottom: 20px; border-bottom: 2px solid var(--border); padding-bottom: 10px; color: var(--primary); }
 
-/* Home Page */
+
 .hero-section { text-align: center; margin-top: 15vh; }
 .hero-section h1 { font-size: 3.5rem; color: var(--primary); margin-bottom: 15px; }
 .cta-btn { margin-top: 25px; padding: 15px 30px; font-size: 1.2rem; background: var(--accent); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
 .cta-btn:hover { background: #2563eb; }
 
-/* Products Grid (With Images) */
+
 .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; }
 .product-card { background: white; border: 1px solid var(--border); padding: 15px; border-radius: 8px; cursor: pointer; transition: 0.2s; text-align: center; }
 .product-card:hover { border-color: var(--accent); box-shadow: 0 4px 10px rgba(0,0,0,0.1); transform: translateY(-3px); }
@@ -40,7 +40,7 @@ h2 { margin-bottom: 20px; border-bottom: 2px solid var(--border); padding-bottom
 .product-card h4 { margin-bottom: 8px; font-size: 1.1rem; color: var(--primary); }
 .product-card .price { color: var(--accent); font-weight: bold; font-size: 1.2rem; }
 
-/* Order Page (POS Layout) */
+
 .pos-layout { display: flex; gap: 20px; height: calc(100vh - 150px); }
 .selection-panel { flex: 2; overflow-y: auto; padding-right: 10px; }
 .billing-panel { flex: 1; background: white; border-radius: 8px; padding: 20px; border: 1px solid var(--border); display: flex; flex-direction: column; min-width: 350px; }
@@ -57,7 +57,7 @@ h2 { margin-bottom: 20px; border-bottom: 2px solid var(--border); padding-bottom
 .remove-btn { width: 30px; height: 30px; border: none; background: #fee2e2; color: #ef4444; border-radius: 4px; font-weight: bold; font-size: 1rem; cursor: pointer; }
 .remove-btn:hover { background: #fecaca; }
 
-/* Subtotal & Discount rows (above the total) */
+
 .summary-row { display: flex; justify-content: space-between; font-size: 1rem; color: #64748b; margin-bottom: 8px; }
 
 .total-row { display: flex; justify-content: space-between; font-size: 1.4rem; font-weight: bold; margin-bottom: 15px; color: var(--primary); }
@@ -65,7 +65,7 @@ h2 { margin-bottom: 20px; border-bottom: 2px solid var(--border); padding-bottom
 .generate-bill-btn:hover { background: #059669; }
 .generate-bill-btn:disabled { opacity: 0.6; cursor: wait; }
 
-/* Database Page */
+
 .dashboard-stats { display: flex; gap: 20px; margin-bottom: 25px; }
 .stat-box { background: white; flex: 1; padding: 25px; border: 1px solid var(--border); border-radius: 8px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
 .stat-box h3 { color: #64748b; font-size: 1.1rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
@@ -77,13 +77,13 @@ h2 { margin-bottom: 20px; border-bottom: 2px solid var(--border); padding-bottom
 .db-table th { background: var(--primary); color: white; font-weight: 500; }
 .db-table tr:hover { background: #f8fafc; }
 
-/* Sales analytics */
+
 .section-title { margin: 10px 0 10px; color: var(--primary); }
 .analytics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px; }
 .daily-scroll { max-height: 320px; overflow-y: auto; }
 @media (max-width: 800px) { .analytics-grid { grid-template-columns: 1fr; } }
 
-/* Final Bill (Receipt) Popup */
+
 .bill-overlay { display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.6); justify-content: center; align-items: center; z-index: 100; padding: 20px; }
 .bill-overlay.show { display: flex; }
 .bill-box { background: white; width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto; border-radius: 8px; padding: 25px; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
@@ -104,7 +104,7 @@ h2 { margin-bottom: 20px; border-bottom: 2px solid var(--border); padding-bottom
 .cancel-btn { background: #94a3b8; }
 .cancel-btn:hover { background: #64748b; }
 
-/* Employee ID menu */
+
 .user-menu { position: relative; }
 .id-btn { border: 1px solid #475569; }
 .user-dropdown { display: none; position: absolute; right: 0; top: 110%; min-width: 230px; background: white; border: 1px solid var(--border); border-radius: 6px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); padding: 12px; z-index: 50; }
@@ -113,11 +113,11 @@ h2 { margin-bottom: 20px; border-bottom: 2px solid var(--border); padding-bottom
 .logout-btn { width: 100%; padding: 10px; background: #ef4444; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; }
 .logout-btn:hover { background: #dc2626; }
 
-/* Login modal */
+
 .login-box { max-width: 420px; }
 .login-error { color: #ef4444; font-size: 0.9rem; min-height: 1.2em; margin-top: 10px; }
 
-/* Print only the bill */
+
 @media print {
     .navbar, .main-content, .bill-actions { display: none !important; }
     .bill-overlay { position: static; background: none; padding: 0; }
