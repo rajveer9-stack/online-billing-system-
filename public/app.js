@@ -1,8 +1,3 @@
-// ==========================================
-// 1. INVENTORY & STATE
-// ==========================================
-// Prices here are for display only. The server has its own price list (server.js)
-// and calculates every bill from that, so keep both in sync if you change a price.
 const inventory = [
     { id: 'Z01', name: "Zenzy Graphic T-Shirt", price: 599, image: "https://assets.myntassets.com/w_412,q_50,,dpr_3,fl_progressive,f_webp/assets/images/22194038/2024/9/28/7159f452-c0b6-4cf6-98f7-f0bcff82f3021727530844469-VEIRDO-Graphic-Printed-Oversized-Fit-Cotton-T-shirt-42172753-1.jpg" },
     { id: 'Z02', name: "Classic Polo Shirt", price: 899, image: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=500&q=80" },
@@ -20,18 +15,14 @@ const inventory = [
 ];
 
 let cart = [];
-let currentUser = null;   // logged-in employee email (null = logged out)
-let pendingPage = null;   // page to open after a successful login
+let currentUser = null;   
+let pendingPage = null;   
 
-// Shown when a product image fails to load (e.g. a bad URL)
 const IMAGE_FALLBACK = "data:image/svg+xml;utf8," + encodeURIComponent(
     '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300"><rect width="100%" height="100%" fill="#e2e8f0"/>' +
     '<text x="50%" y="50%" fill="#64748b" font-family="sans-serif" font-size="20" text-anchor="middle">No image</text></svg>'
 );
 
-// ==========================================
-// 2. HELPERS & API
-// ==========================================
 function escapeHtml(s) {
     return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
@@ -42,15 +33,12 @@ async function api(path, options = {}) {
     const res = await fetch(path, opts);
     let data = {};
     try { data = await res.json(); } catch (e) {}
-    // Session expired / not logged in -> show login popup
+    
     if (res.status === 401 && path !== '/api/login') { setUser(null); openLogin(); }
     if (!res.ok) throw new Error(data.error || 'Request failed');
     return data;
 }
 
-// ==========================================
-// 3. AUTHENTICATION
-// ==========================================
 function setUser(email) {
     currentUser = email;
     document.getElementById('user-menu').style.display = email ? 'block' : 'none';
@@ -109,11 +97,7 @@ document.addEventListener('keydown', e => {
     if (e.key === 'Enter' && document.getElementById('login-modal').classList.contains('show')) submitLogin();
 });
 
-// ==========================================
-// 4. PAGE NAVIGATION LOGIC
-// ==========================================
 function switchPage(pageId) {
-    // Billing and the sales database need an active employee session
     if ((pageId === 'order-page' || pageId === 'database-page') && !currentUser) {
         openLogin(pageId);
         return;
@@ -131,9 +115,7 @@ function switchPage(pageId) {
     if (pageId === 'database-page') renderDatabase();
 }
 
-// ==========================================
-// 5. PRODUCTS CATALOG RENDERER
-// ==========================================
+
 function renderProducts(containerId, isClickable) {
     const container = document.getElementById(containerId);
     container.innerHTML = inventory.map(product => `
@@ -145,10 +127,6 @@ function renderProducts(containerId, isClickable) {
         </div>
     `).join('');
 }
-
-// ==========================================
-// 6. CART (BILLING) LOGIC
-// ==========================================
 function addToCart(productId) {
     const product = inventory.find(p => p.id === productId);
     const existingItem = cart.find(item => item.id === productId);
@@ -161,7 +139,6 @@ function addToCart(productId) {
     updateCartUI();
 }
 
-// Called when the quantity input is edited
 function setQuantity(productId, value) {
     const item = cart.find(i => i.id === productId);
     if (!item) return;
@@ -171,19 +148,18 @@ function setQuantity(productId, value) {
     updateCartUI();
 }
 
-// The X button: remove the item completely
+
 function removeFromCart(productId) {
     cart = cart.filter(i => i.id !== productId);
     updateCartUI();
 }
 
-// Reads the "Discount Given" field (percentage). Empty/invalid/negative = 0.
+
 function getDiscountPercent() {
     const value = parseFloat(document.getElementById('discount-given').value);
     return (isNaN(value) || value < 0) ? 0 : value;
 }
 
-// Converts a discount percentage into a rupee amount (rounded to 2 decimals)
 function calculateDiscountAmount(subtotal, percent) {
     return Math.round(subtotal * percent) / 100;
 }
@@ -217,7 +193,7 @@ function updateCartUI() {
     `).join('');
 
     const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    // Discount % is capped at 100 so the total never goes negative
+  
     const percent = Math.min(getDiscountPercent(), 100);
     const discount = calculateDiscountAmount(subtotal, percent);
     const total = subtotal - discount;
@@ -227,9 +203,6 @@ function updateCartUI() {
     document.getElementById('grand-total').textContent = `₹${total.toFixed(2)}`;
 }
 
-// ==========================================
-// 7. CHECKOUT (saves the bill on the server)
-// ==========================================
 async function generateBill() {
     const customerName = document.getElementById('customer-name').value.trim();
     const customerPhone = document.getElementById('customer-phone').value.trim();
@@ -254,7 +227,7 @@ async function generateBill() {
             }
         });
 
-        // Reset form & cart for the next customer
+       
         document.getElementById('customer-name').value = '';
         document.getElementById('customer-phone').value = '';
         document.getElementById('customer-gst').value = '';
@@ -264,15 +237,12 @@ async function generateBill() {
 
         showBill(bill);
     } catch (err) {
-        alert(err.message);   // a 401 here already re-opens the login popup
+        alert(err.message);   
     } finally {
         btn.disabled = false;
     }
 }
 
-// ==========================================
-// 8. FINAL BILL (RECEIPT) VIEW
-// ==========================================
 function showBill(order) {
     const itemRows = order.items.map(item => `
         <tr>
@@ -319,13 +289,9 @@ function showBill(order) {
 
 function closeBill() {
     document.getElementById('bill-modal').classList.remove('show');
-    // Go to the database page to see the saved record
     switchPage('database-page');
 }
 
-// ==========================================
-// 9. SALES DATABASE PAGE
-// ==========================================
 function formatMonth(ym) {
     const [y, m] = ym.split('-');
     return new Date(y, m - 1, 1).toLocaleString('en-IN', { month: 'long', year: 'numeric' });
@@ -371,12 +337,9 @@ async function renderDatabase() {
     }
 }
 
-// ==========================================
-// 10. INITIALISE
-// ==========================================
 window.onload = async () => {
     try {
-        const { email } = await api('/api/me');   // restores the login after refresh / browser restart
+        const { email } = await api('/api/me');  
         setUser(email);
     } catch (e) {}
     switchPage('home-page');
