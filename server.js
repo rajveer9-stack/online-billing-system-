@@ -9,13 +9,12 @@ const PORT = process.env.PORT || 3000;
 const COOKIE_NAME = 'zenzy_sid';
 const TEN_YEARS_MS = 10 * 365 * 24 * 60 * 60 * 1000; // "indefinite" login until explicit logout
 
-// ---------- Database ----------
+
 const DB_PATH = process.env.DB_PATH || path.join(__dirname, 'zenzy.db');
 const db = new DatabaseSync(DB_PATH);
 db.exec('PRAGMA foreign_keys = ON;');
 db.exec(fs.readFileSync(path.join(__dirname, 'schema.sql'), 'utf8'));
 
-// Hard-coded employees (all share password 12345)
 const EMPLOYEES = [
   '2025kuec2054@iiitkota.ac.in', '2025kuec2051@iiitkota.ac.in',
   '2025kuec2052@iiitkota.ac.in', '2025kuec2053@iiitkota.ac.in',
@@ -26,7 +25,7 @@ const hash = bcrypt.hashSync('12345', 10);
 const seedUser = db.prepare('INSERT OR IGNORE INTO users (email, password_hash) VALUES (?, ?)');
 EMPLOYEES.forEach(e => seedUser.run(e, hash));
 
-// Same catalogue as the frontend's `inventory` (prices are authoritative HERE)
+
 const PRODUCTS = [
   ['Z01', 'Zenzy Graphic T-Shirt', 599], ['Z02', 'Classic Polo Shirt', 899],
   ['Z03', 'Slim Fit Denim Jeans', 1299], ['Z04', 'Cotton Chinos', 1150],
@@ -41,8 +40,7 @@ const upsertProduct = db.prepare(
 );
 PRODUCTS.forEach(p => upsertProduct.run(...p));
 
-// On free hosting the disk is wiped on every restart, so when AUTO_SEED=true and the
-// database has no bills, the demo data (July -> today) is created automatically.
+
 if (process.env.AUTO_SEED === 'true' && db.prepare('SELECT COUNT(*) AS n FROM bills').get().n === 0) {
   try {
     require('child_process').execFileSync(process.execPath, [path.join(__dirname, 'seed-demo.js')], { stdio: 'inherit', env: process.env });
@@ -51,7 +49,7 @@ if (process.env.AUTO_SEED === 'true' && db.prepare('SELECT COUNT(*) AS n FROM bi
   }
 }
 
-// ---------- Helpers ----------
+
 const sha256 = s => crypto.createHash('sha256').update(s).digest('hex');
 const round2 = n => Math.round(n * 100) / 100;
 
@@ -64,7 +62,7 @@ function parseCookies(header = '') {
   );
 }
 
-// Current date/time in India (so "today" and monthly totals match the shop's clock)
+
 function istNow() {
   const parts = new Intl.DateTimeFormat('en-CA', {
     timeZone: 'Asia/Kolkata', year: 'numeric', month: '2-digit', day: '2-digit',
@@ -74,7 +72,7 @@ function istNow() {
   return { date: `${g('year')}-${g('month')}-${g('day')}`, time: `${g('hour')}:${g('minute')}:${g('second')}` };
 }
 
-// ---------- Prepared statements ----------
+
 const q = {
   userByEmail: db.prepare('SELECT * FROM users WHERE email = ?'),
   insertSession: db.prepare('INSERT INTO sessions (token_hash, email) VALUES (?, ?)'),
@@ -98,7 +96,7 @@ const q = {
     FROM bills GROUP BY substr(bill_date, 1, 7) ORDER BY month DESC`)
 };
 
-// Saves the bill and all its items atomically (all or nothing)
+
 function createBill(data) {
   db.exec('BEGIN');
   try {
@@ -118,7 +116,7 @@ function createBill(data) {
   }
 }
 
-// ---------- App ----------
+
 const app = express();
 app.set('trust proxy', 1);   // needed behind Render's HTTPS proxy
 app.use(express.json({ limit: '100kb' }));
@@ -131,7 +129,7 @@ function requireAuth(req, res, next) {
   next();
 }
 
-// --- Auth ---
+
 app.post('/api/login', (req, res) => {
   const email = String(req.body.email || '').trim().toLowerCase();
   const password = String(req.body.password || '');
@@ -161,7 +159,7 @@ app.get('/api/me', (req, res) => {
   res.json({ email: row ? row.email : null });
 });
 
-// --- Bills ---
+
 const GST_REGEX = /^\d{2}[A-Z]{5}\d{4}[A-Z][1-9A-Z]Z[0-9A-Z]$/;
 
 app.post('/api/bills', requireAuth, (req, res) => {
@@ -181,7 +179,7 @@ app.post('/api/bills', requireAuth, (req, res) => {
     return res.status(400).json({ error: 'Add at least one item.' });
   }
 
-  // Rebuild line items from DB prices (ignores any price sent by the browser)
+  
   const lines = [];
   for (const it of items) {
     const product = q.product.get(String(it.id));
@@ -194,7 +192,7 @@ app.post('/api/bills', requireAuth, (req, res) => {
   }
 
   const subtotal = round2(lines.reduce((s, l) => s + l.lineTotal, 0));
-  const discount = Math.round(subtotal * percent) / 100;      // same formula as the frontend
+  const discount = Math.round(subtotal * percent) / 100;     
   const total = round2(subtotal - discount);
   const { date, time } = istNow();
 
@@ -221,12 +219,12 @@ app.get('/api/bills', requireAuth, (req, res) => {
   })));
 });
 
-// --- Sales analytics ---
+
 app.get('/api/analytics', requireAuth, (req, res) => {
   res.json({ summary: q.summary.get(), daily: q.daily.all(), monthly: q.monthly.all() });
 });
 
-// --- Frontend (put index.html, app.js, style.css inside ./public) ---
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(PORT, () => console.log(`Zenzy POS running at http://localhost:${PORT}`));
