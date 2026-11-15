@@ -1,4 +1,3 @@
-# Render "Blueprint": lets Render create the web service automatically from this repo.
 services:
   - type: web
     name: zenzy-billing
